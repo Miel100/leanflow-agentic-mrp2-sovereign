@@ -1,4 +1,5 @@
 ﻿using LeanFlow.Domain.Entities;
+using LeanFlow.Application.Engine;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace LeanFlow.Application.Services
     {
         private readonly List<RatingFile> _ratings = new();
         private readonly List<InventoryRecord> _inventory = new();
+        private readonly MRP2Engine _engine = new();
 
         public LeanMRP2Service()
         {
@@ -37,10 +39,21 @@ namespace LeanFlow.Application.Services
         {
             var result = new List<WorkOrder>();
             foreach (var r in _ratings)
-            {
                 result.Add(new WorkOrder { ItemCode = r.ItemCode, Quantity = r.BatchQuantity, StartDate = System.DateTime.UtcNow, DueDate = System.DateTime.UtcNow.AddDays(5), Status = "Planned", RatingFileId = r.Id });
-            }
             return result;
+        }
+
+        public MRPRunResult RunMRP2(int horizonWeeks = 4)
+        {
+            var forecasts = new List<DemandForecast>
+            {
+                new DemandForecast { ItemCode = "ITEM-001", ForecastedQuantity = 320 },
+                new DemandForecast { ItemCode = "ITEM-002", ForecastedQuantity = 160 },
+                new DemandForecast { ItemCode = "ITEM-003", ForecastedQuantity = 600 },
+                new DemandForecast { ItemCode = "ITEM-004", ForecastedQuantity = 240 },
+                new DemandForecast { ItemCode = "ITEM-005", ForecastedQuantity = 80 },
+            };
+            return _engine.Calculate(_ratings, _inventory, forecasts, horizonWeeks);
         }
 
         public List<RatingFile> GetRatingFiles() => _ratings;

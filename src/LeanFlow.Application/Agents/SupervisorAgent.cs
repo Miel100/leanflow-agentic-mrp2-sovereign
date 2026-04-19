@@ -1,6 +1,8 @@
 ﻿using LeanFlow.Domain.Entities;
 using LeanFlow.Application.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -47,13 +49,39 @@ namespace LeanFlow.Application.Agents
 
         public async Task<object> RunFullMRPCycleAsync()
         {
-            var forecast = new DemandForecast { ItemCode = "ITEM-001", ForecastedQuantity = 500 };
+            var forecast = new DemandForecast { ItemCode = "ALL", ForecastedQuantity = 500 };
             var workOrders = await _mrp.RunSFCAsync(forecast);
-            var demandResult = await _demand.AnalyzeAsync("ITEM-001");
-            var rccpResult = await _rccp.CheckCapacityAsync("ITEM-001");
-            var crpResult = await _crp.PlanCapacityAsync("ITEM-001");
-            var sfcResult = await _sfc.ExecuteAsync("ITEM-001");
-            return new { workOrders = workOrders.Count, demand = demandResult, rccp = rccpResult, crp = crpResult, sfc = sfcResult };
+            var ratings = _mrp.GetRatingFiles();
+            var inventory = _mrp.GetInventory();
+
+            var itemResults = new List<object>();
+            foreach (var r in ratings)
+            {
+                var inv = inventory.FirstOrDefault(i => i.ItemCode == r.ItemCode);
+                decimal stock = inv?.CurrentStock ?? 0;
+                decimal reorder = inv?.ReorderPoint ?? 0;
+
+                var demandResult = await _demand.AnalyzeAsync(r.ItemCode, r.BatchQuantity, stock, reorder);
+                var rccpResult = await _rccp.CheckCapacityAsync(r.MachineGroup, r.UtilizationTarget, r.ShiftPerDay);
+                var crpResult = await _crp.PlanCapacityAsync(r.MachineGroup, r.ProcessingTime, r.SetupTime, r.BatchQuantity);
+                var sfcResult = await _sfc.ExecuteAsync(r.ItemCode, r.BatchQuantity, r.MachineGroup, r.CostPerUnit);
+
+                itemResults.Add(new {
+                    itemCode = r.ItemCode,
+                    description = r.Description,
+                    machineGroup = r.MachineGroup,
+                    demand = demandResult,
+                    rccp = rccpResult,
+                    crp = crpResult,
+                    sfc = sfcResult
+                });
+            }
+
+            return new {
+                totalWorkOrders = workOrders.Count,
+                cycleDate = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm"),
+                items = itemResults
+            };
         }
     }
 }

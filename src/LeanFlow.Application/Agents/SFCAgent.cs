@@ -1,12 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace LeanFlow.Application.Agents
 {
     public class SFCAgent
     {
-        public async Task<string> ExecuteAsync(string input)
+        public async Task<string> ExecuteAsync(string itemCode, int batchQty, string machineGroup, decimal costPerUnit)
         {
-            return "SFCAgent: Shop Floor Control executed using Rating File for - " + input + ". Work orders issued.";
+            decimal totalCost = batchQty * costPerUnit;
+            string dueDate = DateTime.UtcNow.AddDays(5).ToString("yyyy-MM-dd");
+            return $"WO issued | Item: {itemCode} | Qty: {batchQty} | Machine: {machineGroup} | Due: {dueDate} | Cost: ";
         }
     }
 }

@@ -1,12 +1,15 @@
-﻿using System.Threading.Tasks;
+﻿using LeanFlow.Domain.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LeanFlow.Application.Agents
 {
     public class DemandAgent
     {
-        public async Task<string> AnalyzeAsync(string input)
+        public async Task<string> AnalyzeAsync(string itemCode, int forecastedQty, decimal currentStock, decimal reorderPoint)
         {
-            return "DemandAgent: Analyzed demand for - " + input + ". Forecast generated with seasonal adjustments.";
+            string alert = currentStock <= reorderPoint ? " ⚠️ BELOW REORDER POINT" : "";
+            return $"Demand forecast: {forecastedQty} units | Current stock: {currentStock}{alert}";
         }
     }
 }

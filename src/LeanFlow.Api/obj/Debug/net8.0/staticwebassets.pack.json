@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\marte\\Documents\\leanflow-agentic-mrp2-sovereign\\src\\LeanFlow.Api\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.LeanFlow.Api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.LeanFlow.Api.props",
+      "PackagePath": "build\\LeanFlow.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.LeanFlow.Api.props",
+      "PackagePath": "buildMultiTargeting\\LeanFlow.Api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.LeanFlow.Api.props",
+      "PackagePath": "buildTransitive\\LeanFlow.Api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B3EC4BF1-E3F7-4974-8706-B0A74AEAD938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanFlow.Domain", "src\LeanFlow.Domain\LeanFlow.Domain.csproj", "{78458DFF-53A0-452F-8C83-305D54A56714}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanFlow.Application", "src\LeanFlow.Application\LeanFlow.Application.csproj", "{30B59176-40EA-4362-9630-FBF9E43F3DEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanFlow.Infrastructure", "src\LeanFlow.Infrastructure\LeanFlow.Infrastructure.csproj", "{2FB427AC-E0E8-464E-A938-4CCE601FFA07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanFlow.Api", "src\LeanFlow.Api\LeanFlow.Api.csproj", "{316E86E8-06EF-43D8-A425-E9E717B03C96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanFlow.Tests", "src\LeanFlow.Tests\LeanFlow.Tests.csproj", "{C84FA1C6-1309-4F1F-9409-F0B1E6696F65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78458DFF-53A0-452F-8C83-305D54A56714}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78458DFF-53A0-452F-8C83-305D54A56714}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78458DFF-53A0-452F-8C83-305D54A56714}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78458DFF-53A0-452F-8C83-305D54A56714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30B59176-40EA-4362-9630-FBF9E43F3DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30B59176-40EA-4362-9630-FBF9E43F3DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30B59176-40EA-4362-9630-FBF9E43F3DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30B59176-40EA-4362-9630-FBF9E43F3DEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB427AC-E0E8-464E-A938-4CCE601FFA07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB427AC-E0E8-464E-A938-4CCE601FFA07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB427AC-E0E8-464E-A938-4CCE601FFA07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB427AC-E0E8-464E-A938-4CCE601FFA07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316E86E8-06EF-43D8-A425-E9E717B03C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316E86E8-06EF-43D8-A425-E9E717B03C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316E86E8-06EF-43D8-A425-E9E717B03C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316E86E8-06EF-43D8-A425-E9E717B03C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C84FA1C6-1309-4F1F-9409-F0B1E6696F65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C84FA1C6-1309-4F1F-9409-F0B1E6696F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C84FA1C6-1309-4F1F-9409-F0B1E6696F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C84FA1C6-1309-4F1F-9409-F0B1E6696F65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{78458DFF-53A0-452F-8C83-305D54A56714} = {B3EC4BF1-E3F7-4974-8706-B0A74AEAD938}
+		{30B59176-40EA-4362-9630-FBF9E43F3DEC} = {B3EC4BF1-E3F7-4974-8706-B0A74AEAD938}
+		{2FB427AC-E0E8-464E-A938-4CCE601FFA07} = {B3EC4BF1-E3F7-4974-8706-B0A74AEAD938}
+		{316E86E8-06EF-43D8-A425-E9E717B03C96} = {B3EC4BF1-E3F7-4974-8706-B0A74AEAD938}
+		{C84FA1C6-1309-4F1F-9409-F0B1E6696F65} = {B3EC4BF1-E3F7-4974-8706-B0A74AEAD938}
+	EndGlobalSection
+EndGlobal

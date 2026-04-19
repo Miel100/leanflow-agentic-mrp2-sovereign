@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "r+18huw17GUzfy/4Mh34nvP1VTHbiUxFNGx5pVyv7i4=",
+  "Source": "LeanFlow.Api",
+  "BasePath": "_content/LeanFlow.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "LeanFlow.Api\\wwwroot",
+      "Source": "LeanFlow.Api",
+      "ContentRoot": "C:\\Users\\marte\\Documents\\leanflow-agentic-mrp2-sovereign\\src\\LeanFlow.Api\\wwwroot\\",
+      "BasePath": "_content/LeanFlow.Api",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\marte\\Documents\\leanflow-agentic-mrp2-sovereign\\src\\LeanFlow.Api\\wwwroot\\index.html",
+      "SourceId": "LeanFlow.Api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\marte\\Documents\\leanflow-agentic-mrp2-sovereign\\src\\LeanFlow.Api\\wwwroot\\",
+      "BasePath": "_content/LeanFlow.Api",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ]
+}

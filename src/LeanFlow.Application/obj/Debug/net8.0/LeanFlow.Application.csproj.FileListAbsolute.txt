@@ -1,0 +1,16 @@
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\bin\Debug\net8.0\LeanFlow.Application.deps.json
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\bin\Debug\net8.0\LeanFlow.Application.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\bin\Debug\net8.0\LeanFlow.Application.pdb
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\bin\Debug\net8.0\LeanFlow.Domain.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\bin\Debug\net8.0\LeanFlow.Domain.pdb
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\LeanFlow.Application.csproj.AssemblyReference.cache
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\LeanFlow.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\LeanFlow.Application.AssemblyInfoInputs.cache
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\LeanFlow.Application.AssemblyInfo.cs
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\LeanFlow.Application.csproj.CoreCompileInputs.cache
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\LeanFlow.2EDA18AA.Up2Date
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\LeanFlow.Application.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\refint\LeanFlow.Application.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\LeanFlow.Application.pdb
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\ref\LeanFlow.Application.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Application\obj\Debug\net8.0\LeanFlow.Application.sourcelink.json

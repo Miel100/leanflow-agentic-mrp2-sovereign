@@ -1,0 +1,12 @@
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\bin\Debug\net8.0\LeanFlow.Domain.deps.json
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\bin\Debug\net8.0\LeanFlow.Domain.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\bin\Debug\net8.0\LeanFlow.Domain.pdb
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\obj\Debug\net8.0\LeanFlow.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\obj\Debug\net8.0\LeanFlow.Domain.AssemblyInfoInputs.cache
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\obj\Debug\net8.0\LeanFlow.Domain.AssemblyInfo.cs
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\obj\Debug\net8.0\LeanFlow.Domain.csproj.CoreCompileInputs.cache
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\obj\Debug\net8.0\LeanFlow.Domain.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\obj\Debug\net8.0\refint\LeanFlow.Domain.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\obj\Debug\net8.0\LeanFlow.Domain.pdb
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\obj\Debug\net8.0\ref\LeanFlow.Domain.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Domain\obj\Debug\net8.0\LeanFlow.Domain.sourcelink.json

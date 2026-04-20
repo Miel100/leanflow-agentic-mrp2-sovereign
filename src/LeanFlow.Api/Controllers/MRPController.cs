@@ -1,5 +1,7 @@
 ﻿using LeanFlow.Application.Agents;
+using LeanFlow.Application.Agents;
 using LeanFlow.Application.Services;
+using LeanFlow.Application.Engine;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -11,11 +13,13 @@ namespace LeanFlow.Api.Controllers
     {
         private readonly SupervisorAgent _supervisor;
         private readonly LeanMRP2Service _service;
+        private readonly FactoryConfigAgent _configAgent;
 
-        public MRPController(SupervisorAgent supervisor, LeanMRP2Service service)
+        public MRPController(SupervisorAgent supervisor, LeanMRP2Service service, FactoryConfigAgent configAgent)
         {
             _supervisor = supervisor;
             _service = service;
+            _configAgent = configAgent;
         }
 
         [HttpGet("run")]
@@ -28,7 +32,7 @@ namespace LeanFlow.Api.Controllers
         [HttpGet("status")]
         public IActionResult Status()
         {
-            return Ok(new { status = "healthy", agents = new[] { "Demand", "RCCP", "CRP", "SFC", "Supervisor" } });
+            return Ok(new { status = "healthy", agents = new[] { "Demand", "RCCP", "CRP", "SFC", "Supervisor", "FactoryConfig" } });
         }
 
         [HttpPost("prompt")]
@@ -62,5 +66,83 @@ namespace LeanFlow.Api.Controllers
                     .Select(b => new { b.MachineGroup, b.Week, loadPct = b.LoadPct, b.LoadedHours, b.AvailableHours, b.ItemsLoaded })
             });
         }
+
+        [HttpPost("configure")]
+        public async Task<IActionResult> Configure([FromBody] string factoryDescription)
+        {
+            if (string.IsNullOrWhiteSpace(factoryDescription))
+                return BadRequest(new { error = "Please provide a factory description" });
+
+            // Step 1: Extract config from plain English
+            var config = await _configAgent.ExtractConfigAsync(factoryDescription);
+
+            if (config.HasError)
+                return BadRequest(new { error = config.Error });
+
+            // Step 2: Apply config to the service
+            _service.ApplyConfiguration(config.RatingFiles, config.InventoryRecords);
+
+            // Step 3: Run MRP automatically
+            var mrpResult = _service.RunMRP2(config.PlanningHorizonWeeks, config.DemandForecasts);
+
+            // Step 4: Generate plain English plan
+            var plan = GeneratePlan(config, mrpResult);
+
+            return Ok(new {
+                factorySummary = config.FactorySummary,
+                itemsConfigured = config.RatingFiles.Count,
+                planningHorizonWeeks = config.PlanningHorizonWeeks,
+                mrpSummary = new {
+                    totalWorkOrdersPlanned = mrpResult.TotalWorkOrdersPlanned,
+                    totalPlannedCost = mrpResult.TotalPlannedCost,
+                    totalExceptions = mrpResult.TotalExceptions,
+                    purchaseOrderSuggestions = mrpResult.PurchaseOrderSuggestions,
+                    exceptions = mrpResult.Exceptions
+                },
+                actionablePlan = plan,
+                configuredItems = config.RatingFiles.Select(r => new {
+                    r.ItemCode, r.Description, r.MachineGroup,
+                    r.ShiftPerDay, utilizationPct = r.UtilizationTarget * 100,
+                    r.BatchQuantity, r.CostPerUnit
+                })
+            });
+        }
+
+        private string GeneratePlan(FactoryConfigResult config, LeanFlow.Domain.Entities.MRPRunResult mrp)
+        {
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine($"FACTORY PLAN — {DateTime.UtcNow:yyyy-MM-dd}");
+            sb.AppendLine($"Factory: {config.FactorySummary}");
+            sb.AppendLine($"Planning horizon: {config.PlanningHorizonWeeks} weeks");
+            sb.AppendLine();
+            sb.AppendLine($"WORK ORDERS: {mrp.TotalWorkOrdersPlanned} planned");
+            sb.AppendLine($"TOTAL PLANNED COST: ");
+            sb.AppendLine();
+
+            if (mrp.PurchaseOrderSuggestions.Any())
+            {
+                sb.AppendLine("PURCHASE ORDERS REQUIRED:");
+                foreach (var po in mrp.PurchaseOrderSuggestions)
+                    sb.AppendLine($"  {po}");
+                sb.AppendLine();
+            }
+
+            if (mrp.Exceptions.Any())
+            {
+                sb.AppendLine("ALERTS:");
+                foreach (var ex in mrp.Exceptions)
+                    sb.AppendLine($"  {ex}");
+                sb.AppendLine();
+            }
+            else
+            {
+                sb.AppendLine("✅ NO ALERTS — All capacity within limits");
+            }
+
+            sb.AppendLine("System configured and ready. No data retained after this session.");
+            return sb.ToString();
+        }
     }
 }
+
+

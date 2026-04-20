@@ -7,8 +7,8 @@ namespace LeanFlow.Application.Services
 {
     public class LeanMRP2Service
     {
-        private readonly List<RatingFile> _ratings = new();
-        private readonly List<InventoryRecord> _inventory = new();
+        private List<RatingFile> _ratings = new();
+        private List<InventoryRecord> _inventory = new();
         private readonly MRP2Engine _engine = new();
 
         public LeanMRP2Service()
@@ -35,6 +35,13 @@ namespace LeanFlow.Application.Services
             _inventory.Add(new InventoryRecord { ItemCode = "ITEM-005", Description = "Conveyor Belt Module", CurrentStock = 15, SafetyStock = 5, ReorderPoint = 10 });
         }
 
+        // Apply external configuration from FactoryConfigAgent
+        public void ApplyConfiguration(List<RatingFile> ratings, List<InventoryRecord> inventory)
+        {
+            _ratings = ratings;
+            _inventory = inventory;
+        }
+
         public async Task<List<WorkOrder>> RunSFCAsync(DemandForecast forecast)
         {
             var result = new List<WorkOrder>();
@@ -43,9 +50,9 @@ namespace LeanFlow.Application.Services
             return result;
         }
 
-        public MRPRunResult RunMRP2(int horizonWeeks = 4)
+        public MRPRunResult RunMRP2(int horizonWeeks = 4, List<DemandForecast>? forecasts = null)
         {
-            var forecasts = new List<DemandForecast>
+            forecasts ??= new List<DemandForecast>
             {
                 new DemandForecast { ItemCode = "ITEM-001", ForecastedQuantity = 320 },
                 new DemandForecast { ItemCode = "ITEM-002", ForecastedQuantity = 160 },

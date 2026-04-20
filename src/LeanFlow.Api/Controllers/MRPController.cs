@@ -1,8 +1,9 @@
 ﻿using LeanFlow.Application.Agents;
-using LeanFlow.Application.Agents;
 using LeanFlow.Application.Services;
 using LeanFlow.Application.Engine;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace LeanFlow.Api.Controllers
@@ -14,12 +15,14 @@ namespace LeanFlow.Api.Controllers
         private readonly SupervisorAgent _supervisor;
         private readonly LeanMRP2Service _service;
         private readonly FactoryConfigAgent _configAgent;
+        private readonly WatchdogService _watchdog;
 
-        public MRPController(SupervisorAgent supervisor, LeanMRP2Service service, FactoryConfigAgent configAgent)
+        public MRPController(SupervisorAgent supervisor, LeanMRP2Service service, FactoryConfigAgent configAgent, WatchdogService watchdog)
         {
             _supervisor = supervisor;
             _service = service;
             _configAgent = configAgent;
+            _watchdog = watchdog;
         }
 
         [HttpGet("run")]
@@ -32,7 +35,7 @@ namespace LeanFlow.Api.Controllers
         [HttpGet("status")]
         public IActionResult Status()
         {
-            return Ok(new { status = "healthy", agents = new[] { "Demand", "RCCP", "CRP", "SFC", "Supervisor", "FactoryConfig" } });
+            return Ok(new { status = "healthy", agents = new[] { "Demand", "RCCP", "CRP", "SFC", "Supervisor", "FactoryConfig", "Watchdog" } });
         }
 
         [HttpPost("prompt")]
@@ -72,22 +75,12 @@ namespace LeanFlow.Api.Controllers
         {
             if (string.IsNullOrWhiteSpace(factoryDescription))
                 return BadRequest(new { error = "Please provide a factory description" });
-
-            // Step 1: Extract config from plain English
             var config = await _configAgent.ExtractConfigAsync(factoryDescription);
-
             if (config.HasError)
                 return BadRequest(new { error = config.Error });
-
-            // Step 2: Apply config to the service
             _service.ApplyConfiguration(config.RatingFiles, config.InventoryRecords);
-
-            // Step 3: Run MRP automatically
             var mrpResult = _service.RunMRP2(config.PlanningHorizonWeeks, config.DemandForecasts);
-
-            // Step 4: Generate plain English plan
             var plan = GeneratePlan(config, mrpResult);
-
             return Ok(new {
                 factorySummary = config.FactorySummary,
                 itemsConfigured = config.RatingFiles.Count,
@@ -108,17 +101,32 @@ namespace LeanFlow.Api.Controllers
             });
         }
 
+        [HttpGet("watchdog/run")]
+        public async Task<IActionResult> RunWatchdog()
+        {
+            var result = await _watchdog.RunCheckAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("watchdog/status")]
+        public IActionResult WatchdogStatus()
+        {
+            return Ok(new {
+                lastRunTime = _watchdog.GetLastRunTime(),
+                checkHistory = _watchdog.GetCheckHistory().TakeLast(10)
+            });
+        }
+
         private string GeneratePlan(FactoryConfigResult config, LeanFlow.Domain.Entities.MRPRunResult mrp)
         {
-            var sb = new System.Text.StringBuilder();
-            sb.AppendLine($"FACTORY PLAN — {DateTime.UtcNow:yyyy-MM-dd}");
+            var sb = new StringBuilder();
+            sb.AppendLine($"FACTORY PLAN — {System.DateTime.UtcNow:yyyy-MM-dd}");
             sb.AppendLine($"Factory: {config.FactorySummary}");
             sb.AppendLine($"Planning horizon: {config.PlanningHorizonWeeks} weeks");
             sb.AppendLine();
             sb.AppendLine($"WORK ORDERS: {mrp.TotalWorkOrdersPlanned} planned");
             sb.AppendLine($"TOTAL PLANNED COST: ");
             sb.AppendLine();
-
             if (mrp.PurchaseOrderSuggestions.Any())
             {
                 sb.AppendLine("PURCHASE ORDERS REQUIRED:");
@@ -126,7 +134,6 @@ namespace LeanFlow.Api.Controllers
                     sb.AppendLine($"  {po}");
                 sb.AppendLine();
             }
-
             if (mrp.Exceptions.Any())
             {
                 sb.AppendLine("ALERTS:");
@@ -135,14 +142,9 @@ namespace LeanFlow.Api.Controllers
                 sb.AppendLine();
             }
             else
-            {
                 sb.AppendLine("✅ NO ALERTS — All capacity within limits");
-            }
-
             sb.AppendLine("System configured and ready. No data retained after this session.");
             return sb.ToString();
         }
     }
 }
-
-

@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<LeanMRP2Service>();
 builder.Services.AddSingleton<AlertService>();
+builder.Services.AddSingleton<WatchdogService>();
 builder.Services.AddSingleton<EventEngine>();
 builder.Services.AddScoped<DemandAgent>();
 builder.Services.AddScoped<RCCPAgent>();
@@ -31,7 +32,13 @@ app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseCors();
 app.UseHangfireDashboard("/hangfire");
+
+// Schedule daily MRP cycle
 RecurringJob.AddOrUpdate<MRPScheduler>("daily-mrp-cycle", x => x.RunDailyMRPCycleAsync(), Cron.Daily);
+
+// Schedule Watchdog every 15 minutes — Circle 3
+RecurringJob.AddOrUpdate<MRPScheduler>("watchdog-check", x => x.RunWatchdogCheckAsync(), "*/15 * * * *");
+
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

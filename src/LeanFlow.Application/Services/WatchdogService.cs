@@ -17,6 +17,8 @@ namespace LeanFlow.Application.Services
         private MRPRunResult? _lastMRPResult;
         private DateTime _lastRunTime = DateTime.MinValue;
         private readonly List<WatchdogCheckResult> _checkHistory = new();
+private DateTime _lastAllowedRun = DateTime.MinValue;
+private const int FreeTierCooldownHours = 24; // Free tier: once per day only
 
         // Thresholds
         private const decimal CapacityWarningThreshold = 85m;
@@ -30,7 +32,19 @@ namespace LeanFlow.Application.Services
         }
 
         public async Task<WatchdogCheckResult> RunCheckAsync()
-        {
+        {// Free tier limitation — once per day only
+var hoursSinceLastRun = (DateTime.UtcNow - _lastAllowedRun).TotalHours;
+if (hoursSinceLastRun < FreeTierCooldownHours && _lastAllowedRun != DateTime.MinValue)
+{
+    var nextRun = _lastAllowedRun.AddHours(FreeTierCooldownHours);
+    return new WatchdogCheckResult
+    {
+        Status = "FREE_TIER_LIMIT",
+        Error = $"Free tier: Watchdog runs once per 24 hours. Next run available at {nextRun:yyyy-MM-dd HH:mm} UTC. Upgrade to Enterprise for every-15-minute monitoring.",
+        CheckTime = DateTime.UtcNow
+    };
+}
+_lastAllowedRun = DateTime.UtcNow;
             var checkResult = new WatchdogCheckResult
             {
                 CheckTime = DateTime.UtcNow,

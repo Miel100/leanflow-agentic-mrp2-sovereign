@@ -35,7 +35,7 @@ namespace LeanFlow.Api.Controllers
         [HttpGet("status")]
         public IActionResult Status()
         {
-            return Ok(new { status = "healthy", agents = new[] { "Demand", "RCCP", "CRP", "SFC", "Supervisor", "FactoryConfig", "Watchdog" } });
+            return Ok(new { status = "healthy", agents = new[] { "Demand", "RCCP", "CRP", "SFC", "Supervisor", "FactoryConfig" } });
         }
 
         [HttpPost("prompt")]
@@ -148,3 +148,4 @@ namespace LeanFlow.Api.Controllers
         }
     }
 }
+

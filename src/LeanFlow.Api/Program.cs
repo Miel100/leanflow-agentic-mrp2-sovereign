@@ -10,6 +10,8 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(p => p.AllowAnyOrig
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<LeanMRP2Service>();
+builder.Services.AddSingleton<AlertService>();
+builder.Services.AddSingleton<EventEngine>();
 builder.Services.AddScoped<DemandAgent>();
 builder.Services.AddScoped<RCCPAgent>();
 builder.Services.AddScoped<CRPAgent>();

@@ -14,6 +14,7 @@ builder.Services.AddSingleton<AlertService>();
 builder.Services.AddSingleton<WatchdogService>();
 builder.Services.AddSingleton<EventEngine>();
 builder.Services.AddSingleton<MQTTBridgeService>();
+builder.Services.AddSingleton<DecisionEngine>();
 builder.Services.AddScoped<DemandAgent>();
 builder.Services.AddScoped<RCCPAgent>();
 builder.Services.AddScoped<CRPAgent>();

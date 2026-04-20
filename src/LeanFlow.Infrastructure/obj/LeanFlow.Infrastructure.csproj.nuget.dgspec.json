@@ -47,6 +47,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "MQTTnet": {
+              "target": "Package",
+              "version": "[4.3.3.952, )"
+            },
             "Microsoft.Extensions.Http": {
               "target": "Package",
               "version": "[10.0.6, )"

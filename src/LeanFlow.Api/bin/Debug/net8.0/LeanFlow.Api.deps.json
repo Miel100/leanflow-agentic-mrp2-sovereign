@@ -12,6 +12,7 @@
           "Hangfire.InMemory": "1.0.0",
           "LeanFlow.Application": "1.0.0",
           "LeanFlow.Infrastructure": "1.0.0",
+          "MQTTnet.AspNetCore": "4.3.3.952",
           "Microsoft.AspNetCore.OpenApi": "10.0.6",
           "Swashbuckle.AspNetCore": "6.6.2"
         },
@@ -509,6 +510,25 @@
           }
         }
       },
+      "MQTTnet/4.3.3.952": {
+        "runtime": {
+          "lib/net7.0/MQTTnet.dll": {
+            "assemblyVersion": "4.3.3.952",
+            "fileVersion": "4.3.3.952"
+          }
+        }
+      },
+      "MQTTnet.AspNetCore/4.3.3.952": {
+        "dependencies": {
+          "MQTTnet": "4.3.3.952"
+        },
+        "runtime": {
+          "lib/net7.0/MQTTnet.AspNetCore.dll": {
+            "assemblyVersion": "4.3.3.952",
+            "fileVersion": "4.3.3.952"
+          }
+        }
+      },
       "Newtonsoft.Json/11.0.1": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -684,6 +704,7 @@
       "LeanFlow.Application/1.0.0": {
         "dependencies": {
           "LeanFlow.Domain": "1.0.0",
+          "MQTTnet": "4.3.3.952",
           "Microsoft.Extensions.Http": "10.0.6",
           "Microsoft.SemanticKernel": "1.28.0",
           "Microsoft.SemanticKernel.Agents.Core": "1.45.0"
@@ -1010,6 +1031,20 @@
       "sha512": "sha512-2SaUqgYKvnrkkfLP5yo1Wl5+MKVNQtxoCw6uPxz7SiuZsOf4bR0lQCjieWpK0T/fVrTuc6A8x17KcfYWh+Le8A==",
       "path": "microsoft.semantickernel.core/1.45.0",
       "hashPath": "microsoft.semantickernel.core.1.45.0.nupkg.sha512"
+    },
+    "MQTTnet/4.3.3.952": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6AFOGkdnqzIfvaPbTnPLYvBibBdGfJlTTWonIZp+VHpRy6fEl+KT9Z1AG1/4AaDAw5TJ0WpqCmrV9TVUWkLffg==",
+      "path": "mqttnet/4.3.3.952",
+      "hashPath": "mqttnet.4.3.3.952.nupkg.sha512"
+    },
+    "MQTTnet.AspNetCore/4.3.3.952": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A2zzElISFMBRFWcOa9ixKRQPz2KRNgyzxLgSb4aAPtg8He9JtkKmTkTV90VhZTWgBjYPt8JAqZXpx5eDqnGlJg==",
+      "path": "mqttnet.aspnetcore/4.3.3.952",
+      "hashPath": "mqttnet.aspnetcore.4.3.3.952.nupkg.sha512"
     },
     "Newtonsoft.Json/11.0.1": {
       "type": "package",

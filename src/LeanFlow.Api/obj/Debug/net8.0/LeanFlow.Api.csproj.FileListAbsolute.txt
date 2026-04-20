@@ -100,3 +100,5 @@ C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Api\bin\De
 C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Api\bin\Debug\net8.0\zh-TW\Hangfire.Core.resources.dll
 C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Api\bin\Debug\net8.0\zh\Hangfire.Core.resources.dll
 C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Api\bin\Debug\net8.0\LeanFlow.Api.staticwebassets.runtime.json
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Api\bin\Debug\net8.0\MQTTnet.dll
+C:\Users\marte\Documents\leanflow-agentic-mrp2-sovereign\src\LeanFlow.Api\bin\Debug\net8.0\MQTTnet.AspNetCore.dll

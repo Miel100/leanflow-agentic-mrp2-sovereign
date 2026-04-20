@@ -392,6 +392,14 @@
           }
         }
       },
+      "MQTTnet/4.3.3.952": {
+        "runtime": {
+          "lib/net7.0/MQTTnet.dll": {
+            "assemblyVersion": "4.3.3.952",
+            "fileVersion": "4.3.3.952"
+          }
+        }
+      },
       "Npgsql/9.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "10.0.6",
@@ -521,6 +529,7 @@
       "LeanFlow.Application/1.0.0": {
         "dependencies": {
           "LeanFlow.Domain": "1.0.0",
+          "MQTTnet": "4.3.3.952",
           "Microsoft.Extensions.Http": "10.0.6",
           "Microsoft.SemanticKernel": "1.28.0",
           "Microsoft.SemanticKernel.Agents.Core": "1.45.0"
@@ -771,6 +780,13 @@
       "sha512": "sha512-2SaUqgYKvnrkkfLP5yo1Wl5+MKVNQtxoCw6uPxz7SiuZsOf4bR0lQCjieWpK0T/fVrTuc6A8x17KcfYWh+Le8A==",
       "path": "microsoft.semantickernel.core/1.45.0",
       "hashPath": "microsoft.semantickernel.core.1.45.0.nupkg.sha512"
+    },
+    "MQTTnet/4.3.3.952": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6AFOGkdnqzIfvaPbTnPLYvBibBdGfJlTTWonIZp+VHpRy6fEl+KT9Z1AG1/4AaDAw5TJ0WpqCmrV9TVUWkLffg==",
+      "path": "mqttnet/4.3.3.952",
+      "hashPath": "mqttnet.4.3.3.952.nupkg.sha512"
     },
     "Npgsql/9.0.0": {
       "type": "package",

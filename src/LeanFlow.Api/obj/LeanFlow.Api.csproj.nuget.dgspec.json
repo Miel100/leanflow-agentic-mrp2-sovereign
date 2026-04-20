@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[1.0.0, )"
             },
+            "MQTTnet.AspNetCore": {
+              "target": "Package",
+              "version": "[4.3.3.952, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.6, )"
@@ -133,6 +137,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "MQTTnet": {
+              "target": "Package",
+              "version": "[4.3.3.952, )"
+            },
             "Microsoft.Extensions.Http": {
               "target": "Package",
               "version": "[10.0.6, )"

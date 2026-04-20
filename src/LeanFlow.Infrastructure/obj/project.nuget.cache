@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IGrwLR3B+64=",
+  "dgSpecHash": "cinVO3+K4Es=",
   "success": true,
   "projectFilePath": "C:\\Users\\marte\\Documents\\leanflow-agentic-mrp2-sovereign\\src\\LeanFlow.Infrastructure\\LeanFlow.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -36,6 +36,7 @@
     "C:\\Users\\marte\\.nuget\\packages\\microsoft.semantickernel.connectors.azureopenai\\1.28.0\\microsoft.semantickernel.connectors.azureopenai.1.28.0.nupkg.sha512",
     "C:\\Users\\marte\\.nuget\\packages\\microsoft.semantickernel.connectors.openai\\1.28.0\\microsoft.semantickernel.connectors.openai.1.28.0.nupkg.sha512",
     "C:\\Users\\marte\\.nuget\\packages\\microsoft.semantickernel.core\\1.45.0\\microsoft.semantickernel.core.1.45.0.nupkg.sha512",
+    "C:\\Users\\marte\\.nuget\\packages\\mqttnet\\4.3.3.952\\mqttnet.4.3.3.952.nupkg.sha512",
     "C:\\Users\\marte\\.nuget\\packages\\npgsql\\9.0.0\\npgsql.9.0.0.nupkg.sha512",
     "C:\\Users\\marte\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\9.0.0\\npgsql.entityframeworkcore.postgresql.9.0.0.nupkg.sha512",
     "C:\\Users\\marte\\.nuget\\packages\\openai\\2.1.0-beta.1\\openai.2.1.0-beta.1.nupkg.sha512",

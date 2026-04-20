@@ -155,7 +155,54 @@
             }
         }
     </script><div class='panel' style='margin-top:20px'>
-        <h2>🏭 Executive Integrator — Configure Your Factory</h2>
+        <h2><div class='panel' style='margin-top:20px'>
+        <h2>🤖 Decision Engine — Circle 5A</h2>
+        <p style='color:#888;font-size:13px;margin-bottom:16px'>Autonomous decision making — switch between Approval and Autonomous mode.</p>
+        <div style='display:flex;gap:10px;margin-bottom:16px;align-items:center'>
+            <button class='btn' style='background:#00875A' onclick='setMode("APPROVAL")'>🔒 Approval Mode</button>
+            <button class='btn' style='background:#E67E22' onclick='setMode("AUTONOMOUS")'>⚡ Autonomous Mode</button>
+            <span id='currentMode' style='color:#888;font-size:13px'>Current mode: loading...</span>
+        </div>
+        <button class='btn' onclick='analyzeDecisions()'>🧠 Analyze &amp; Decide</button>
+        <div class='output' id='decisionOutput'>Decision results will appear here...</div>
+    </div>
+    <script>
+        async function loadMode() {
+            const r = await fetch(api + '/api/decisions/mode');
+            const d = await r.json();
+            document.getElementById('currentMode').textContent = 'Current mode: ' + d.mode;
+        }
+        async function setMode(mode) {
+            const r = await fetch(api + '/api/decisions/mode?mode=' + mode, { method: 'POST' });
+            const d = await r.json();
+            document.getElementById('currentMode').textContent = 'Current mode: ' + d.mode;
+            document.getElementById('decisionOutput').textContent = 'Mode changed to: ' + d.mode;
+        }
+        async function analyzeDecisions() {
+            document.getElementById('decisionOutput').textContent = 'Analyzing factory state...';
+            const r = await fetch(api + '/api/decisions/analyze', { method: 'POST' });
+            const d = await r.json();
+            if (d.totalDecisions === 0) {
+                document.getElementById('decisionOutput').textContent = '✅ No decisions needed — factory is healthy.';
+                return;
+            }
+            let out = 'Mode: ' + d.mode + '\n';
+            out += 'Total decisions: ' + d.totalDecisions + '\n';
+            out += 'Executed: ' + d.executedDecisions + '\n';
+            out += 'Awaiting approval: ' + d.pendingApproval + '\n\n';
+            d.decisions.forEach(dec => {
+                out += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+                out += dec.status + ': ' + dec.title + '\n';
+                out += dec.justification + '\n';
+                if (dec.result) out += 'Result: ' + dec.result + '\n';
+                if (dec.status === 'AWAITING_APPROVAL') {
+                    out += 'Decision ID: ' + dec.id + '\n';
+                }
+            });
+            document.getElementById('decisionOutput').textContent = out;
+        }
+        loadMode();
+    </script>🏭 Executive Integrator — Configure Your Factory</h2>
         <p style='color:#888;font-size:13px;margin-bottom:16px'>Describe your factory in plain English. The system will configure itself, run MRP, and generate an actionable plan. No data is retained after the session.</p>
         <textarea id='factoryInput' style='width:100%;background:#0f1117;border:1px solid #2a2d3e;border-radius:8px;padding:12px;color:#fff;font-size:14px;min-height:100px;resize:vertical' placeholder='e.g. We make automotive steel brackets. We have 2 CNC machines running 2 shifts at 85% utilization. Batch size is 50 units. Current stock is 200. We need 150 units per week. Cost is 35 euros per unit.'></textarea>
         <button class='btn' style='margin-top:10px' onclick='configureFactory()'>Configure &amp; Run MRP</button>

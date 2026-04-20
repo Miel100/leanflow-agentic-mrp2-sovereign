@@ -109,7 +109,31 @@
         document.getElementById('promptInput').addEventListener('keypress', e => { if (e.key === 'Enter') sendPrompt(); });
         loadStatus();
     </script>
-</body>
+<div class='panel' style='margin-top:20px'>
+        <h2>🏭 Executive Integrator — Configure Your Factory</h2>
+        <p style='color:#888;font-size:13px;margin-bottom:16px'>Describe your factory in plain English. The system will configure itself, run MRP, and generate an actionable plan. No data is retained after the session.</p>
+        <textarea id='factoryInput' style='width:100%;background:#0f1117;border:1px solid #2a2d3e;border-radius:8px;padding:12px;color:#fff;font-size:14px;min-height:100px;resize:vertical' placeholder='e.g. We make automotive steel brackets. We have 2 CNC machines running 2 shifts at 85% utilization. Batch size is 50 units. Current stock is 200. We need 150 units per week. Cost is 35 euros per unit.'></textarea>
+        <button class='btn' style='margin-top:10px' onclick='configureFactory()'>Configure &amp; Run MRP</button>
+        <div class='output' id='factoryOutput'>Factory plan will appear here...</div>
+    </div>
+    <script>
+        async function configureFactory() {
+            const desc = document.getElementById('factoryInput').value;
+            if (!desc) return;
+            document.getElementById('factoryOutput').textContent = 'Configuring factory and running MRP...';
+            try {
+                const r = await fetch(api + '/api/mrp/configure', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(desc) });
+                const d = await r.json();
+                let out = d.factorySummary + '\n\n';
+                out += 'Items configured: ' + d.itemsConfigured + '\n';
+                out += 'Planning horizon: ' + d.planningHorizonWeeks + ' weeks\n\n';
+                out += d.actionablePlan;
+                document.getElementById('factoryOutput').textContent = out;
+            } catch(e) {
+                document.getElementById('factoryOutput').textContent = 'Error: ' + e.message;
+            }
+        }
+    </script></body>
 </html>
 
 

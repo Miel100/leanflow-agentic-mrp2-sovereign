@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LeanFlow.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a203e894f1a319b57d148ccbe0c438765fa2930")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+595c433a54841ba22351e8d1346b7fd914e6283e")]
 [assembly: System.Reflection.AssemblyProductAttribute("LeanFlow.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LeanFlow.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

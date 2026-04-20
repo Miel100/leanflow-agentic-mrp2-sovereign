@@ -42,11 +42,20 @@ namespace LeanFlow.Application.Services
                 var factory = new MqttFactory();
                 _mqttClient = factory.CreateMqttClient();
 
-                var options = new MqttClientOptionsBuilder()
-                    .WithTcpServer(_brokerHost, _brokerPort)
-                    .WithClientId($"leanflow-mrp2-{Guid.NewGuid()}")
-                    .WithCleanSession()
-                    .Build();
+                var username = Environment.GetEnvironmentVariable("MQTT_USERNAME") ?? "";
+var password = Environment.GetEnvironmentVariable("MQTT_PASSWORD") ?? "";
+
+var tlsOptions = new MqttClientTlsOptionsBuilder()
+    .UseTls()
+    .Build();
+
+var options = new MqttClientOptionsBuilder()
+    .WithTcpServer(_brokerHost, _brokerPort)
+    .WithClientId($"leanflow-mrp2-{Guid.NewGuid()}")
+    .WithCleanSession()
+    .WithTlsOptions(tlsOptions)
+    .WithCredentials(username, password)
+    .Build();
 
                 _mqttClient.ApplicationMessageReceivedAsync += HandleMessageAsync;
 
